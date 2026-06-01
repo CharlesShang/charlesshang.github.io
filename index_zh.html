@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,6 +12,7 @@
       --ink: #1f2933;
       --muted: #5d6673;
       --accent: #0f766e;
+      --line: #d9d4ca;
     }
 
     * {
@@ -103,6 +104,56 @@
       color: var(--accent);
     }
 
+    .vibe-coding {
+      margin-top: 72px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+
+    .vibe-coding h2 {
+      margin: 0 0 18px;
+      font-size: 0.92rem;
+      letter-spacing: 0;
+    }
+
+    .vibe-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .vibe-card {
+      display: block;
+      min-height: 132px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.42);
+      text-decoration: none;
+    }
+
+    .vibe-card:hover {
+      border-color: var(--accent);
+    }
+
+    .vibe-card h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      letter-spacing: 0;
+    }
+
+    .vibe-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    .vibe-card p + p {
+      margin-top: 8px;
+    }
+
     @media (max-width: 720px) {
       .language-toggle {
         top: 20px;
@@ -112,11 +163,15 @@
       main {
         padding-top: 22vh;
       }
+
+      .vibe-links {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <a class="language-toggle" href="index_zh.html" aria-label="Open Chinese page">中文</a>
+  <a class="language-toggle" href="index.html" aria-label="Open English page">English</a>
   <main>
     <p class="eyebrow">charlesshang.github.io</p>
     <h1>Charles Shang</h1>
@@ -125,6 +180,22 @@
     <nav class="links" aria-label="personal links">
       <a href="https://github.com/charlesshang">GitHub</a>
     </nav>
+
+    <section class="vibe-coding" aria-labelledby="vibe-coding-title">
+      <h2 id="vibe-coding-title">Vibe Coding</h2>
+      <nav class="vibe-links" aria-label="Vibe Coding links">
+        <a class="vibe-card" href="https://charlesshang.github.io/yijing/index.html">
+          <h3>易經</h3>
+          <p>觀象以明變，窮理以知幾。</p>
+          <p>進退、得失、吉凶、悔吝。</p>
+        </a>
+        <a class="vibe-card" href="https://charlesshang.github.io/sishi/index.html">
+          <h3>四史</h3>
+          <p>自黃帝以至晉初，凡三千年之興衰治亂，皆在四史之間</p>
+          <p>史記，漢書，後漢書，三國志</p>
+        </a>
+      </nav>
+    </section>
   </main>
 </body>
 </html>
