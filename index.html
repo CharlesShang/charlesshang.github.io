@@ -73,7 +73,7 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(3rem, 10vw, 6rem);
+      font-size: clamp(2.4rem, 7vw, 4.6rem);
       line-height: 1;
       letter-spacing: 0;
     }
@@ -107,12 +107,55 @@
       color: var(--accent);
     }
 
-    .links [data-zh-only] {
+    .vibe-coding {
       display: none;
+      margin-top: 72px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
     }
 
-    html[data-lang="zh"] .links [data-zh-only] {
-      display: inline-flex;
+    html[data-lang="zh"] .vibe-coding {
+      display: block;
+    }
+
+    .vibe-coding h2 {
+      margin: 0 0 18px;
+      font-size: 0.92rem;
+      letter-spacing: 0;
+    }
+
+    .vibe-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .vibe-card {
+      display: block;
+      min-height: 132px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.42);
+      text-decoration: none;
+    }
+
+    .vibe-card:hover {
+      border-color: var(--accent);
+    }
+
+    .vibe-card h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      letter-spacing: 0;
+    }
+
+    .vibe-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
     }
 
     @media (max-width: 720px) {
@@ -124,6 +167,10 @@
       main {
         padding-top: 22vh;
       }
+
+      .vibe-links {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -133,26 +180,38 @@
     <p class="eyebrow">charlesshang.github.io</p>
     <h1 data-i18n="name">Charles Shang</h1>
     <p class="intro" data-i18n="intro">
-      I like quiet tools, clear thinking, and turning small ideas into things that run.
+      Reader. Thinker. Explorer.
     </p>
 
     <nav class="links" aria-label="personal links">
       <a href="https://github.com/charlesshang">GitHub</a>
-      <a href="https://charlesshang.github.io/yijing/index.html" data-zh-only>易经</a>
-      <a href="https://charlesshang.github.io/sishi/index.html" data-zh-only>四史</a>
     </nav>
+
+    <section class="vibe-coding" aria-labelledby="vibe-coding-title">
+      <h2 id="vibe-coding-title">Vibe Coding</h2>
+      <nav class="vibe-links" aria-label="Vibe Coding links">
+        <a class="vibe-card" href="https://charlesshang.github.io/yijing/index.html">
+          <h3>易经</h3>
+          <p>观象以明变，穷理以知几。</p>
+        </a>
+        <a class="vibe-card" href="https://charlesshang.github.io/sishi/index.html">
+          <h3>四史</h3>
+          <p>整理《史记》《汉书》《后汉书》《三国志》的阅读入口与历史脉络。</p>
+        </a>
+      </nav>
+    </section>
   </main>
   <script>
     const translations = {
       en: {
         button: "中文",
         name: "Charles Shang",
-        intro: "I like quiet tools, clear thinking, and turning small ideas into things that run."
+        intro: "Reader. Thinker. Explorer."
       },
       zh: {
         button: "English",
         name: "Charles Shang",
-        intro: "喜欢安静的工具、清晰的思考，也喜欢把小想法做成能运行的东西。"
+        intro: "Reader. Thinker. Explorer."
       }
     };
 
