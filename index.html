@@ -5,210 +5,480 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Charles Shang</title>
   <meta name="description" content="Charles Shang personal homepage">
+  <script>(function(){try{var s=localStorage.getItem('gj-theme');var t=(s==='light'||s==='dark')?s:(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
   <style>
-    :root {
+    /* =========================================================
+       Museum theme — shared design language with /guji/
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      -webkit-text-size-adjust: 100%;
       color-scheme: light;
-      --bg: #f7f4ef;
-      --ink: #1f2933;
-      --muted: #5d6673;
-      --accent: #0f766e;
-      --line: #d9d4ca;
+      scroll-behavior: smooth;
+    }
+    html[data-theme] { background: var(--gj-bg); color: var(--gj-text); }
+    html[data-theme="dark"] { color-scheme: dark; }
+
+    :root {
+      --gj-bg: #EDEBE4;
+      --gj-bg-raised: #F5F4EF;
+      --gj-bg-sunken: #E4E1D8;
+      --gj-line: #D3CFC3;
+      --gj-line-strong: #BEB9AA;
+      --gj-text: #1A1915;
+      --gj-text-2: #4C4940;
+      --gj-text-3: #645F50;
+      --gj-accent: #78591B;
+      --gj-accent-soft: #B9A06A;
+      --gj-ghost-stroke: rgba(26, 25, 21, .13);
+      --gj-ghost-stroke-hover: rgba(126, 95, 30, .45);
+      --gj-light-top: radial-gradient(62% 48% at 50% 2%, rgba(255,255,255,.95), transparent 66%);
+      --gj-light-edge: radial-gradient(120% 78% at 50% 108%, rgba(90,84,68,.16), transparent 62%);
+      --gj-case-bg: radial-gradient(72% 62% at 50% 0%, #FFFFFF, transparent 68%);
+
+      --gj-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+                  "Songti TC", "Songti SC", "Source Han Serif TC", "Noto Serif CJK TC",
+                  STSong, SimSun, serif;
+      --gj-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "PingFang SC",
+                 "Hiragino Sans GB", "Source Han Sans TC", "Noto Sans CJK TC", Helvetica, Arial, sans-serif;
+
+      --gj-s1: 8px;  --gj-s2: 16px; --gj-s3: 24px; --gj-s4: 32px;
+      --gj-s5: 44px; --gj-s6: 64px; --gj-s7: 96px; --gj-s8: 130px;
+      --gj-page: 1280px;
+      --gj-gutter: 46px;
+      --gj-ease: cubic-bezier(.2, .7, .2, 1);
+      --gj-dur: .35s;
     }
 
-    * {
-      box-sizing: border-box;
+    [data-theme="dark"] {
+      --gj-bg: #15140F;
+      --gj-bg-raised: #1D1B15;
+      --gj-bg-sunken: #100F0B;
+      --gj-line: #39352A;
+      --gj-line-strong: #4A4536;
+      --gj-text: #E6E1D3;
+      --gj-text-2: #A39C88;
+      --gj-text-3: #918B78;
+      --gj-accent: #C2A05A;
+      --gj-accent-soft: #6E5C33;
+      --gj-ghost-stroke: rgba(194, 160, 90, .16);
+      --gj-ghost-stroke-hover: rgba(194, 160, 90, .40);
+      --gj-light-top: radial-gradient(58% 46% at 50% 6%, rgba(194,160,90,.20), transparent 62%);
+      --gj-light-edge: radial-gradient(90% 60% at 50% 100%, rgba(0,0,0,.60), transparent 60%);
+      --gj-case-bg: radial-gradient(70% 60% at 50% 0%, rgba(194,160,90,.09), transparent 65%);
     }
 
     body {
       margin: 0;
-      min-height: 100vh;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
-      background: var(--bg);
+      background: var(--gj-bg);
+      color: var(--gj-text);
+      font-family: var(--gj-serif);
+      -webkit-font-smoothing: antialiased;
+      transition: background-color .3s ease, color .3s ease;
     }
+    ::selection { background: var(--gj-accent); color: var(--gj-bg-raised); }
+    a { color: inherit; }
 
-    main {
-      width: min(680px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 18vh 0 56px;
+    /* ===== Hero =========================================== */
+    .gj-hall {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 62vh;
+      overflow: hidden;
+      border-bottom: 1px solid var(--gj-line-strong);
     }
-
+    .gj-hall::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: var(--gj-light-top), var(--gj-light-edge);
+    }
+    .gj-hall__inner {
+      position: relative;
+      max-width: 760px;
+      padding: var(--gj-s7) var(--gj-s3) var(--gj-s6);
+      text-align: center;
+    }
     .intro {
-      max-width: 560px;
       margin: 0;
-      color: var(--muted);
-      font-size: clamp(1.04rem, 2vw, 1.24rem);
-      line-height: 1.75;
+      font-size: clamp(34px, 6vw, 66px);
+      font-weight: 400;
+      line-height: 1.28;
+      letter-spacing: .11em;
+      text-indent: .11em;
+      background: linear-gradient(180deg, var(--gj-text) 0%, var(--gj-accent) 145%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .gj-rule {
+      width: 1px;
+      height: 56px;
+      margin: var(--gj-s5) auto 0;
+      background: linear-gradient(180deg, var(--gj-accent), transparent);
     }
 
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 56px;
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
+    /* ===== Gallery shell ================================== */
+    .gj-galleries {
+      max-width: var(--gj-page);
+      margin: 0 auto;
+      border-left: 1px solid var(--gj-line);
+      border-right: 1px solid var(--gj-line);
     }
+    .content-section + .content-section .content-section__head { border-top: 1px solid var(--gj-line-strong); }
 
-    .links a {
-      color: var(--muted);
-      font-size: 0.76rem;
-      font-weight: 450;
-      text-decoration: none;
+    .content-section__head {
+      padding: var(--gj-s6) var(--gj-gutter) var(--gj-s3);
+      background: var(--gj-bg-raised);
+      border-bottom: 1px solid var(--gj-line-strong);
     }
-
-    .links a:hover {
-      color: var(--accent);
-    }
-
-    .content-section {
-      margin-top: 72px;
-    }
-
     .content-section h2 {
-      margin: 0 0 22px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--line);
-      font-family: ui-serif, "Songti TC", "Songti SC", "Noto Serif CJK TC", "Noto Serif CJK SC", Georgia, serif;
-      font-size: 1.7rem;
-      font-weight: 800;
-      letter-spacing: 0;
+      margin: 0;
+      font-family: var(--gj-serif);
+      font-size: clamp(24px, 3.4vw, 34px);
+      font-weight: 400;
+      letter-spacing: .22em;
+      color: var(--gj-text);
     }
 
     .content-section .blog-title {
       display: flex;
       align-items: center;
-      letter-spacing: 0.08em;
+      letter-spacing: .22em;
     }
-
     .blog-title svg {
-      width: 1.05em;
-      height: 1.05em;
-      margin: 0 0.08em 0 0.02em;
-      color: var(--accent);
+      width: .9em;
+      height: .9em;
+      margin: 0 .12em 0 .04em;
+      color: var(--gj-accent);
       fill: none;
       stroke: currentColor;
       stroke-linecap: round;
       stroke-linejoin: round;
       stroke-width: 1.7;
     }
-
-    .blog-title .face-eye {
-      fill: currentColor;
-      stroke: none;
-    }
+    .blog-title .face-eye { fill: currentColor; stroke: none; }
 
     .script-word {
       display: inline-block;
-      margin: 0 0.08em;
-      color: var(--accent);
+      margin: 0 .12em;
+      color: var(--gj-accent);
       font-family: "Snell Roundhand", "Apple Chancery", "Segoe Script", "Brush Script MT", cursive;
-      font-size: 1.75em;
+      font-size: 1.6em;
       font-weight: 600;
-      line-height: 0.55;
+      line-height: .55;
+      letter-spacing: 0;
       transform: rotate(-5deg);
-      vertical-align: -0.08em;
+      vertical-align: -.06em;
     }
 
-    .content-links {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .content-links--single {
-      grid-template-columns: 1fr;
-    }
+    /* ===== Exhibit rows =================================== */
+    .content-links { display: block; }
 
     .content-card {
-      display: block;
-      min-height: 132px;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      color: var(--ink);
-      background: rgba(255, 255, 255, 0.42);
+      position: relative;
+      display: grid;
+      grid-template-columns: var(--gj-s8) 1fr 96px;
+      align-items: center;
+      min-height: 200px;
+      padding: var(--gj-s5) var(--gj-gutter);
+      border-bottom: 1px solid var(--gj-line);
+      overflow: hidden;
+      color: var(--gj-text);
       text-decoration: none;
+      transition: background-color var(--gj-dur) ease;
+    }
+    .content-links > .content-card:last-child { border-bottom: 0; }
+    .content-card:hover,
+    .content-card:focus-visible { background: var(--gj-bg-raised); }
+    .content-card:focus-visible { outline: 2px solid var(--gj-accent); outline-offset: -2px; }
+
+    .content-card::before {
+      content: attr(data-no);
+      position: relative;
+      align-self: center;
+      width: 74px;
+      padding-top: 12px;
+      border-top: 1px solid var(--gj-accent);
+      font-family: var(--gj-sans);
+      font-size: 11px;
+      letter-spacing: .22em;
+      color: var(--gj-accent);
+    }
+    .content-card::after {
+      content: "→";
+      position: relative;
+      justify-self: end;
+      font-family: var(--gj-sans);
+      font-size: 18px;
+      color: var(--gj-accent);
+      opacity: .55;
+      transition: transform var(--gj-dur) var(--gj-ease), opacity var(--gj-dur) ease;
+    }
+    .content-card:hover::after,
+    .content-card:focus-visible::after { transform: translateX(8px); opacity: 1; }
+
+    .content-card__ghost {
+      position: absolute;
+      right: min(18vw, 250px);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 200px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--gj-ghost-stroke);
+      pointer-events: none;
+      user-select: none;
+      transition: -webkit-text-stroke-color .45s ease, transform .6s var(--gj-ease);
+    }
+    .content-card:hover .content-card__ghost {
+      -webkit-text-stroke-color: var(--gj-ghost-stroke-hover);
+      transform: translateY(-50%) scale(1.04);
+    }
+    @supports not (-webkit-text-stroke: 1px red) {
+      .content-card__ghost { color: var(--gj-ghost-stroke); -webkit-text-stroke: 0; }
     }
 
-    .content-card:hover {
-      border-color: var(--accent);
-    }
-
+    .content-card__info { position: relative; padding: 0 var(--gj-s4); }
     .content-card h3 {
-      margin: 0 0 10px;
-      font-family: ui-serif, "Songti TC", "Songti SC", "Noto Serif CJK TC", "Noto Serif CJK SC", Georgia, serif;
-      font-size: 1rem;
-      letter-spacing: 0;
+      margin: 0 0 16px;
+      font-family: var(--gj-serif);
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 400;
+      letter-spacing: .2em;
     }
-
     .content-card p {
       margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.65;
+      max-width: 62ch;
+      font-size: 14px;
+      line-height: 2.05;
+      letter-spacing: .04em;
+      color: var(--gj-text-2);
     }
+    .content-card p + p { margin-top: 8px; }
 
-    .content-card p + p {
-      margin-top: 8px;
+    /* ===== Footer ========================================= */
+    .links {
+      max-width: var(--gj-page);
+      margin: 0 auto;
+      padding: var(--gj-s5) var(--gj-gutter) var(--gj-s6);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: var(--gj-case-bg), var(--gj-bg-raised);
+      border-top: 1px solid var(--gj-line-strong);
+      font-family: var(--gj-sans);
     }
+    .links a {
+      padding: 0 20px;
+      font-size: 11px;
+      line-height: 2;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gj-text-3);
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .links a + a { border-left: 1px solid var(--gj-line-strong); }
+    .links a:hover,
+    .links a:focus-visible { color: var(--gj-accent); }
 
-    @media (max-width: 720px) {
-      main {
-        padding-top: 22vh;
-      }
+    /* ===== Theme toggle =================================== */
+    .gj-theme-toggle {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 100;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      background: var(--gj-bg-raised);
+      border: 1px solid var(--gj-line-strong);
+      border-radius: 0;
+      color: var(--gj-accent);
+      font-family: var(--gj-sans);
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color .2s, color .2s, border-color .2s;
+    }
+    .gj-theme-toggle:hover { border-color: var(--gj-accent); }
+    .gj-theme-toggle:focus-visible { outline: 2px solid var(--gj-accent); outline-offset: 2px; }
+    .gj-theme-toggle::before { content: "☾"; }
+    [data-theme="dark"] .gj-theme-toggle::before { content: "☀"; }
 
-      .content-links {
+    /* ===== Responsive ===================================== */
+    @media (max-width: 900px) {
+      :root { --gj-gutter: 22px; }
+      .content-card {
         grid-template-columns: 1fr;
+        gap: 18px;
+        min-height: 0;
+        padding: var(--gj-s4) var(--gj-gutter);
       }
+      .content-card::after { justify-self: start; }
+      .content-card__info { padding: 0; max-width: calc(100% - 24px); }
+      .content-card__ghost { right: -26px; font-size: 118px; }
+      .content-section__head { padding: var(--gj-s5) var(--gj-gutter) var(--gj-s3); }
+    }
+    @media (max-width: 480px) {
+      .gj-hall { min-height: 56vh; }
+      .gj-hall__inner { padding: 72px 20px 48px; }
+      .intro { letter-spacing: .06em; text-indent: .06em; }
+      .content-card p { font-size: 13.5px; }
+      .content-card__ghost { right: -30px; font-size: 104px; }
+      .links a { padding: 0 14px; }
+      .gj-theme-toggle { right: 14px; bottom: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+      .content-card:hover .content-card__ghost { transform: translateY(-50%); }
+    }
+    @media print {
+      html, body { background: #fff !important; color: #000 !important; }
+      .gj-hall::before, .content-card__ghost, .gj-theme-toggle { display: none !important; }
+      .content-card { break-inside: avoid; border-color: #999; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <p class="intro">Reader. Thinker. Explorer.</p>
+  <header class="gj-hall">
+    <div class="gj-hall__inner">
+      <p class="intro">Reader. Thinker. Explorer.</p>
+      <div class="gj-rule"></div>
+    </div>
+  </header>
 
+  <main class="gj-galleries">
     <section class="content-section" aria-labelledby="blog-title">
-      <h2 class="blog-title" id="blog-title" aria-label="Blog">
-        <span aria-hidden="true">BL</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="12" r="9"/>
-          <circle class="face-eye" cx="9" cy="10" r="1"/>
-          <circle class="face-eye" cx="15" cy="10" r="1"/>
-          <path d="M8 14c1 1.6 2.3 2.4 4 2.4s3-.8 4-2.4"/>
-        </svg>
-        <span aria-hidden="true">G</span>
-      </h2>
-      <nav class="content-links content-links--single" aria-label="Blog links">
-        <a class="content-card" href="https://charlesshang.github.io/blogs/">
-          <h3>Random Notes</h3>
-          <p>機器學習、大型語言模型、擴散模型與表徵學習。</p>
-          <p>技術筆記與論文深讀。</p>
+      <div class="content-section__head">
+        <h2 class="blog-title" id="blog-title" aria-label="Blog">
+          <span aria-hidden="true">BL</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/>
+            <circle class="face-eye" cx="9" cy="10" r="1"/>
+            <circle class="face-eye" cx="15" cy="10" r="1"/>
+            <path d="M8 14c1 1.6 2.3 2.4 4 2.4s3-.8 4-2.4"/>
+          </svg>
+          <span aria-hidden="true">G</span>
+        </h2>
+      </div>
+      <nav class="content-links" aria-label="Blog links">
+        <a class="content-card" data-no="No. 001" href="https://charlesshang.github.io/blogs/">
+          <span class="content-card__ghost" aria-hidden="true">記</span>
+          <span class="content-card__info">
+            <h3>Random Notes</h3>
+            <p>機器學習、大型語言模型、擴散模型與表徵學習。</p>
+            <p>技術筆記與論文深讀。</p>
+          </span>
         </a>
       </nav>
     </section>
 
     <section class="content-section" aria-labelledby="ai-literature-title">
-      <h2 id="ai-literature-title">AI <span class="script-word">for</span> Literature</h2>
+      <div class="content-section__head">
+        <h2 id="ai-literature-title">AI <span class="script-word">for</span> Literature</h2>
+      </div>
       <nav class="content-links" aria-label="AI for Literature links">
-        <a class="content-card" href="https://charlesshang.github.io/guji/">
-          <h3>古籍</h3>
-          <p>詩經、唐詩、宋詞、易經、論語、老莊與古文名篇。</p>
-          <p>原文、字音、白話與講評，逐章逐篇讀懂經典。</p>
+        <a class="content-card" data-no="No. 002" href="https://charlesshang.github.io/guji/">
+          <span class="content-card__ghost" aria-hidden="true">古</span>
+          <span class="content-card__info">
+            <h3>古籍</h3>
+            <p>詩經、唐詩、宋詞、易經、論語、老莊與古文名篇。</p>
+            <p>原文、字音、白話與講評，逐章逐篇讀懂經典。</p>
+          </span>
         </a>
-        <a class="content-card" href="https://charlesshang.github.io/sishi/index.html">
-          <h3>四史</h3>
-          <p>自黃帝以至晉初，凡三千年之興衰治亂，皆在四史之間</p>
-          <p>史記，漢書，後漢書，三國志</p>
+        <a class="content-card" data-no="No. 003" href="https://charlesshang.github.io/sishi/index.html">
+          <span class="content-card__ghost" aria-hidden="true">史</span>
+          <span class="content-card__info">
+            <h3>四史</h3>
+            <p>自黃帝以至晉初，凡三千年之興衰治亂，皆在四史之間</p>
+            <p>史記，漢書，後漢書，三國志</p>
+          </span>
         </a>
       </nav>
     </section>
-
-    <nav class="links" aria-label="personal links">
-      <a href="https://github.com/charlesshang">GitHub</a>
-      <a href="https://www.linkedin.com/in/charlesshang/?locale=en">LinkedIn</a>
-      <a href="https://scholar.google.com/citations?user=HvTC0TIAAAAJ&amp;hl=en&amp;oi=ao">Google Scholar</a>
-    </nav>
   </main>
+
+  <nav class="links" aria-label="personal links">
+    <a href="https://github.com/charlesshang">GitHub</a>
+    <a href="https://www.linkedin.com/in/charlesshang/?locale=en">LinkedIn</a>
+    <a href="https://scholar.google.com/citations?user=HvTC0TIAAAAJ&amp;hl=en&amp;oi=ao">Google Scholar</a>
+  </nav>
+
+  <script>
+    (function () {
+      'use strict';
+      var KEY = 'gj-theme', DARK = 'dark', LIGHT = 'light';
+      var root = document.documentElement;
+      var media = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+      var userSelected = false;
+
+      function readStored() {
+        try {
+          var v = localStorage.getItem(KEY);
+          userSelected = v === LIGHT || v === DARK;
+          return userSelected ? v : null;
+        } catch (e) { userSelected = false; return null; }
+      }
+      function systemTheme() { return media && media.matches ? DARK : LIGHT; }
+      function syncMeta(theme) {
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (!meta) { meta = document.createElement('meta'); meta.name = 'theme-color'; document.head.appendChild(meta); }
+        meta.content = theme === DARK ? '#15140F' : '#EDEBE4';
+      }
+      function syncButton(theme) {
+        var b = document.querySelector('.gj-theme-toggle');
+        if (!b) return;
+        var next = theme === DARK ? 'light' : 'dark';
+        b.setAttribute('aria-label', 'Switch to ' + next + ' theme');
+        b.setAttribute('title', 'Switch to ' + next + ' theme');
+        b.setAttribute('aria-pressed', theme === DARK ? 'true' : 'false');
+      }
+      function applyTheme(theme) {
+        var safe = theme === DARK ? DARK : LIGHT;
+        root.setAttribute('data-theme', safe);
+        syncMeta(safe);
+        syncButton(safe);
+      }
+      function createToggle() {
+        if (document.querySelector('.gj-theme-toggle')) return;
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'gj-theme-toggle';
+        b.addEventListener('click', function () {
+          var next = root.getAttribute('data-theme') === DARK ? LIGHT : DARK;
+          try { localStorage.setItem(KEY, next); userSelected = true; } catch (e) { userSelected = false; }
+          applyTheme(next);
+        });
+        document.body.appendChild(b);
+        syncButton(root.getAttribute('data-theme'));
+      }
+
+      applyTheme(readStored() || systemTheme());
+      createToggle();
+
+      window.addEventListener('storage', function (e) {
+        if (e.key !== KEY) return;
+        if (e.newValue === LIGHT || e.newValue === DARK) { userSelected = true; applyTheme(e.newValue); }
+        else { userSelected = false; applyTheme(systemTheme()); }
+      });
+      if (media) {
+        var onChange = function (e) { if (!userSelected) applyTheme(e.matches ? DARK : LIGHT); };
+        if (media.addEventListener) media.addEventListener('change', onChange);
+        else if (media.addListener) media.addListener(onChange);
+      }
+    })();
+  </script>
 </body>
 </html>
